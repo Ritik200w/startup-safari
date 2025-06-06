@@ -8,35 +8,35 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLables:
-      app:labels:
+    matchLabels:
+      app: mysql
   template:
     metadata:
       labels:
         app: mysql
     spec:
-      conatainers:
-      - name: mysql
-        image: mysql:8.0
-        ports:
-        - containerPort:3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD
-        - name: MYSQL_DATABASE
-          valueFrom:
-            configMapKeyRef:
-            name: startup-config
-            key: MYSQL_DATABASE
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: startup-config
+                  key: MYSQL_DATABASE
           volumeMounts:
-          - name: mysql-pv-storage
-            mounthPath: /var/lib/mysql
-            subpath: mysql-data
-        volumes:
+            - name: mysql-pv-storage
+              mountPath: /var/lib/mysql
+              subPath: mysql-data
+      volumes:
         - name: mysql-pv-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
-        
+ 
