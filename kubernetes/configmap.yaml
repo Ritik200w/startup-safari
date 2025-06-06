@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: configMap
+metadata:
+  name: startup-config
+  namespace: startup-namespace
+data:
+  MYSQL_DATABASE: mysql
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/finalyear
+  SPRING_DATASOURCE_USERNAME: root

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: startup-deploy
+  name: startup-deploy
+  namespace: startup-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: startup-deploy
+  template:
+    metadata:
+      labels:
+        app: startup-deploy
+    spec:
+      containers:
+      - name: startup
+        image: ritikw/startup
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+        valueFrom:
+          configMapKeyRef:
+            name: startup-config
+            key: SPRING_DATASOURCE_URL
+        - name: MYSQL_DATABASE
+        valueFrom:
+          configMapKeyRef:
+            name: startup-config
+            key: SPRING_DATASOURCE_USERNAME
+        - name: MYSQL_DATABASE
+        valueFrom:
+          configMapKeyRef:
+            name: startup-config
+            key: MYSQL_DATABASE 
+        - name: SPRING_DATASOURCE_PASSWORD: 
+        valueFrom:
+          configMapKeyRef:
+            name: mysql-secret
+            key: SPRING_DATASOURCE_PASSWORD
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
