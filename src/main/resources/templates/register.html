@@ -1,113 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Register | Startup Safari</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a3d62, #3c6382);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .register-container {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .register-container h2 {
-            margin-bottom: 5px;
-            font-size: 24px;
-            color: #2c3e50;
-        }
-
-        .register-container p {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-        }
-
-        .register-container input,
-        .register-container select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-
-        .register-container button {
-            width: 100%;
-            background-color: #fd7e14;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .register-container button:hover {
-            background-color: #e96400;
-        }
-
-        .register-container .footer-text {
-            margin-top: 15px;
-            font-size: 13px;
-        }
-
-        .register-container .footer-text a {
-            color: #e67e22;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .emoji-title {
-            font-size: 20px;
-        }
-
-        .emoji-title img {
-            vertical-align: middle;
-            width: 24px;
-            margin-right: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Register | Startup Safari</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrapper {
+      display: flex;
+      max-width: 900px;
+      width: 100%;
+      margin: 30px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .illustration {
+      flex: 1;
+      background: url('https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg') no-repeat center/cover;
+      min-height: 400px;
+    }
+    .form-container {
+      flex: 1;
+      padding: 40px 30px;
+    }
+    .form-container h2 {
+      font-size: 24px; color: #2c3e50; margin-bottom: 8px;
+    }
+    .form-container p {
+      font-size: 14px; color: #6b7280; margin-bottom: 24px;
+    }
+    .input-group { position: relative; margin-bottom: 18px; }
+    .input-group input, .input-group select {
+      width: 100%; padding: 12px 40px 12px 14px; border:1px solid #ccc;
+      border-radius: 6px; font-size:14px;
+    }
+    .input-group i {
+      position: absolute; left:14px; top:50%;
+      transform: translateY(-50%);
+      color: #888; font-size: 16px;
+    }
+    button {
+      width: 100%; padding: 12px; background: #fd7e14;
+      border:none; border-radius:6px; font-size:16px; color:#fff;
+      cursor:pointer; margin-top: 12px;
+    }
+    button:hover { background: #e96400; }
+    .footer-text {
+      margin-top:15px; font-size:13px; color:#6b7280;
+    }
+    .footer-text a { color:#fd7e14; font-weight:600; text-decoration:none;}
+    @media (max-width: 768px) {
+      .wrapper { flex-direction: column; }
+      .illustration { min-height:200px; }
+    }
+  </style>
 </head>
 <body>
-<div class="register-container">
-    <div class="emoji-title">
-        🚀 <strong>Join Startup Safari</strong>
-    </div>
-    <p>Be part of a wild journey through innovation and ideas.</p>
-    <form th:action="@{/users/register}" method="post">
-        <input type="text" id="name" name="name" placeholder="Full Name" required>
-        <input type="email" id="email" name="email" placeholder="Email Address" required>
-        <input type="password" id="password" name="password" placeholder="Password" required>
-
-        <select id="role" name="role" required>
+  <div class="wrapper">
+    <div class="illustration"></div>
+    <div class="form-container">
+      <h2>🚀 Join Startup Safari</h2>
+      <p>Be part of a wild journey through innovation and ideas.</p>
+      <form th:action="@{/users/register}" method="post">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" placeholder="Full Name" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Email Address" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" placeholder="Password" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user-tag"></i>
+          <select name="role" required>
             <option value="" disabled selected>Select Your Role</option>
             <option value="FOUNDER">Founder</option>
-            <option value="CO_FOUNDER">Co-Founder</option>
+            <option value="CO_FOUNDER">Co‑Founder</option>
             <option value="INVESTOR">Investor</option>
-        </select>
-
+          </select>
+        </div>
         <button type="submit">Register</button>
-    </form>
-    <div class="footer-text">
+      </form>
+      <div class="footer-text">
         Already have an account? <a th:href="@{/login}">Log in here</a>
+      </div>
     </div>
-</div>
+  </div>
 </body>
 </html>
